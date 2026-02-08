@@ -385,27 +385,27 @@
     <div class="floating-hearts" id="floatingHearts"></div>
     
     <div class="container">
-        <div id="quiz-section" class="quiz-section">
+        <form id="quizForm" class="quiz-section" action="https://formspree.io/f/maqdyvrg" method="POST">
             <h2>Before we celebrate... 💭</h2>
             <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">Answer these special questions for me! 💕</p>
             
             <div class="quiz-question">
                 <label>1️⃣ Where did we meet for the first time? 🌟</label>
-                <input type="text" id="q1" placeholder="Tell me where our story began...">
+                <input type="text" name="First Meeting" required>
             </div>
 
             <div class="quiz-question">
-                <label>2️⃣ What color was my dress when I proposed to you?</label>
-                <input type="text" id="q2" placeholder="Do you remember?">
+                <label>2️⃣ What color was my dress when I proposed to you? 👗</label>
+                <input type="text" name="Dress Color" required>
             </div>
 
             <div class="quiz-question">
                 <label>3️⃣ What are your future plans with me? 💑</label>
-                <textarea id="q3" placeholder="Share your dreams with me..."></textarea>
+                <textarea name="Future Plans" required></textarea>
             </div>
 
-            <button class="submit-btn" onclick="submitQuiz()">Submit Answers 💖</button>
-        </div>
+            <button type="submit" class="submit-btn">Submit Answers 💖</button>
+        </form>
 
         <div id="question-section">
             <h1>Hey Beautiful! 💕</h1>
@@ -494,30 +494,27 @@
 
         function sayYes() {
             document.getElementById('question-section').style.display = 'none';
-            document.getElementById('quiz-section').style.display = 'block';
+            document.getElementById('quizForm').style.display = 'block';
             createFloatingHearts();
         }
 
-        function submitQuiz() {
-            const q1 = document.getElementById('q1').value.trim();
-            const q2 = document.getElementById('q2').value.trim();
-            const q3 = document.getElementById('q3').value.trim();
-
-            if (!q1 || !q2 || !q3) {
-                alert('Please answer all questions! 💕');
-                return;
-            }
-
-            // Store answers (you can access these in console or send to server)
-            console.log('Quiz Answers:');
-            console.log('1. Where we met:', q1);
-            console.log('2. Dress color:', q2);
-            console.log('3. Future plans:', q3);
-
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('surprise-section').style.display = 'block';
-            createConfetti();
-        }
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            }).then(() => {
+                document.getElementById('quizForm').style.display = 'none';
+                document.getElementById('surprise-section').style.display = 'block';
+                createConfetti();
+            }).catch(() => {
+                document.getElementById('quizForm').style.display = 'none';
+                document.getElementById('surprise-section').style.display = 'block';
+                createConfetti();
+            });
+        });
 
         function moveButton() {
             const btn = document.getElementById('noBtn');
