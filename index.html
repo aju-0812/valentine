@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 60px 50px;
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 105, 180, 0.3);
+            max-width: 550px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            animation: containerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 105, 180, 0.3); }
+            50% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 105, 180, 0.6); }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #e91e63, #ff6b9d, #c2185b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: textShine 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+        }
+
+        @keyframes textShine {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .heart {
+            font-size: 100px;
+            animation: heartbeat 1.5s infinite;
+            margin: 20px 0;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 100, 0.6));
+            display: inline-block;
+        }
+
+        .question {
+            font-size: 1.8em;
+            font-weight: 600;
+            background: linear-gradient(90deg, #ff6b9d, #c2185b, #e91e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 30px 0;
+            animation: questionPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes questionPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #e91e63, #ff6b9d);
+            color: white;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .yes-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .yes-btn:hover::before {
+            left: 100%;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.6);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #bbb, #ddd);
+            color: #666;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-btn:hover {
+            transform: scale(0.95);
+        }
+
+        .surprise {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .surprise h2 {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #e91e63, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: celebrationBounce 0.6s ease-in-out;
+        }
+
+        @keyframes celebrationBounce {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2) rotate(-5deg); }
+            75% { transform: scale(1.2) rotate(5deg); }
+        }
+
+        .surprise p {
+            font-size: 1.3em;
+            color: #555;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            10% { transform: scale(1.15) rotate(-3deg); }
+            20% { transform: scale(1.1) rotate(3deg); }
+            30% { transform: scale(1.2) rotate(-3deg); }
+            40% { transform: scale(1.1) rotate(3deg); }
+            50% { transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: float 4s infinite;
+            opacity: 0;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) rotate(180deg) scale(1);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        .rose {
+            font-size: 40px;
+            display: inline-block;
+            margin: 0 5px;
+            animation: roseGrow 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes roseGrow {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .sad-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 200, 200, 0.3);
+            border-radius: 15px;
+            animation: sadShake 0.5s;
+        }
+
+        .sad-message p {
+            font-size: 1.2em;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .crying-emoji {
+            font-size: 60px;
+            animation: cry 1s infinite;
+            display: inline-block;
+        }
+
+        @keyframes cry {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-10px); }
+            75% { transform: translateY(5px); }
+        }
+
+        @keyframes sadShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .broken-heart {
+            font-size: 40px;
+            display: inline-block;
+            animation: heartBreak 0.6s;
+        }
+
+        @keyframes heartBreak {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .quiz-section {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .quiz-section h2 {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(45deg, #e91e63, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .quiz-question {
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .quiz-question label {
+            font-size: 1.1em;
+            color: #555;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .quiz-question input, .quiz-question textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #ff6b9d;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .quiz-question input:focus, .quiz-question textarea:focus {
+            outline: none;
+            border-color: #e91e63;
+            box-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .quiz-question textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            margin-top: 30px;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #e91e63, #ff6b9d);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+            transition: all 0.4s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <div id="quiz-section" class="quiz-section">
+            <h2>Before we celebrate... 💭</h2>
+            <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">Answer these special questions for me! 💕</p>
+            
+            <div class="quiz-question">
+                <label>1️⃣ Where did we meet for the first time? 🌟</label>
+                <input type="text" id="q1" placeholder="Tell me where our story began...">
+            </div>
+
+            <div class="quiz-question">
+                <label>2️⃣ What color was my dress when I proposed to you?</label>
+                <input type="text" id="q2" placeholder="Do you remember?">
+            </div>
+
+            <div class="quiz-question">
+                <label>3️⃣ What are your future plans with me? 💑</label>
+                <textarea id="q3" placeholder="Share your dreams with me..."></textarea>
+            </div>
+
+            <button class="submit-btn" onclick="submitQuiz()">Submit Answers 💖</button>
+        </div>
+
+        <div id="question-section">
+            <h1>Hey Beautiful! 💕</h1>
+            <div class="heart">❤️</div>
+            <p class="question">Will You Be My Valentine?</p>
+            <div class="buttons">
+                <button class="yes-btn" onclick="sayYes()">Yes! 💖</button>
+                <button class="no-btn" id="noBtn" onmouseover="showSadness()" onclick="showSadness()">No</button>
+            </div>
+            <div class="sad-message" id="sadMessage">
+                <div class="crying-emoji">😢</div>
+                <div class="broken-heart">💔</div>
+                <p><strong>Oh no... You're breaking my heart!</strong></p>
+                <p>Please reconsider... I promise to make you the happiest! 🥺</p>
+                <p style="font-size: 1em; color: #999; margin-top: 15px;">Click "Yes" to make me smile again! 💕</p>
+            </div>
+        </div>
+
+        <div id="surprise-section" class="surprise">
+            <h2>Yay! 🎉💕</h2>
+            <div class="heart">💖</div>
+            <div class="roses">
+                <span class="rose" style="animation-delay: 0.1s">🌹</span>
+                <span class="rose" style="animation-delay: 0.2s">🌹</span>
+                <span class="rose" style="animation-delay: 0.3s">🌹</span>
+            </div>
+            <p>You just made me the happiest person alive! ✨</p>
+            <p style="margin-top: 20px;">I can't wait to spend this Valentine's Day with you! 💝</p>
+        </div>
+    </div>
+
+    <script>
+        let sadnessShown = false;
+
+        // Create sparkles on mouse move
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.8) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px ${Math.random() > 0.5 ? '#ff69b4' : '#fff'}`;
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+
+        function showSadness() {
+            if (!sadnessShown) {
+                const sadMessage = document.getElementById('sadMessage');
+                sadMessage.style.display = 'block';
+                sadnessShown = true;
+                
+                // Make the Yes button bigger and more attractive
+                const yesBtn = document.querySelector('.yes-btn');
+                yesBtn.style.transform = 'scale(1.2)';
+                yesBtn.style.animation = 'pulse 0.8s infinite';
+                
+                // Add crying tears effect
+                createTears();
+            }
+            moveButton();
+        }
+
+        function createTears() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const tear = document.createElement('div');
+                    tear.textContent = '💧';
+                    tear.style.position = 'fixed';
+                    tear.style.fontSize = '20px';
+                    tear.style.left = (Math.random() * 100) + '%';
+                    tear.style.top = '20%';
+                    tear.style.animation = 'float 3s linear forwards';
+                    tear.style.pointerEvents = 'none';
+                    container.appendChild(tear);
+                    setTimeout(() => tear.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function sayYes() {
+            document.getElementById('question-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            createFloatingHearts();
+        }
+
+        function submitQuiz() {
+            const q1 = document.getElementById('q1').value.trim();
+            const q2 = document.getElementById('q2').value.trim();
+            const q3 = document.getElementById('q3').value.trim();
+
+            if (!q1 || !q2 || !q3) {
+                alert('Please answer all questions! 💕');
+                return;
+            }
+
+            // Store answers (you can access these in console or send to server)
+            console.log('Quiz Answers:');
+            console.log('1. Where we met:', q1);
+            console.log('2. Dress color:', q2);
+            console.log('3. Future plans:', q3);
+
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('surprise-section').style.display = 'block';
+            createConfetti();
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.querySelector('.container');
+            const maxX = container.offsetWidth - btn.offsetWidth - 100;
+            const maxY = container.offsetHeight - btn.offsetHeight - 150;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'absolute';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💓', '💞'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }, 200);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#e91e63', '#c2185b', '#ff69b4', '#ff1493'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.opacity = Math.random();
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    confetti.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
+                    confetti.style.pointerEvents = 'none';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
